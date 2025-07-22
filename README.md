@@ -16,6 +16,10 @@ Tcl/Tk, communicating via goold old pipes, the way Bell Labs intended.
 
 ![](screenshots/gameplay.png)
 
+Also seen on [Ryan Hart VF Cup](https://www.twitch.tv/videos/2517088832):
+
+![](screenshots/ryancup.png)
+
 # Features
 
 GORTS is heavily inspired by [StreamControl](http://farpnut.net/streamcontrol/)
