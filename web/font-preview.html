@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>Font Preview</title>
+<link href="fonts.css" rel="stylesheet" />
+
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    background: #15161d;
+    font-family: "Segoe UI", Arial, sans-serif;
+  }
+
+  main {
+    width: min(1120px, calc(100vw - 48px));
+    margin: 0 auto;
+    padding: 32px 0;
+  }
+
+  h1 {
+    margin: 0 0 20px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  button {
+    color: inherit;
+    background: #232633;
+    border: 1px solid #3a3f52;
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  button:hover,
+  button.active {
+    border-color: #ff3f74;
+    background: #302837;
+  }
+
+  button strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+
+  button span {
+    color: #c9cedd;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 2;
+    margin-top: 24px;
+    overflow: hidden;
+    background: #050507;
+    border: 1px solid #343847;
+  }
+
+  .stage img,
+  .sample {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .stage img {
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .sample {
+    font-family: var(--preview-font);
+    font-weight: 700;
+  }
+
+  .score,
+  .name,
+  .title {
+    position: absolute;
+    color: white;
+    line-height: 1;
+  }
+
+  .title {
+    top: 7%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: clamp(12px, 1.5vw, 20px);
+  }
+
+  .score {
+    top: 0;
+    width: 8%;
+    text-align: center;
+    font-size: clamp(30px, 5vw, 56px);
+  }
+
+  .score.p1 {
+    left: 9%;
+  }
+
+  .score.p2 {
+    right: 9%;
+  }
+
+  .name {
+    top: 16%;
+    width: 22%;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: clamp(18px, 3vw, 34px);
+  }
+
+  .name.p1 {
+    left: 15%;
+  }
+
+  .name.p2 {
+    right: 15%;
+  }
+
+  code {
+    display: block;
+    margin-top: 16px;
+    color: #c9cedd;
+    background: #232633;
+    border-radius: 6px;
+    padding: 12px;
+    white-space: normal;
+  }
+</style>
+
+<main>
+  <h1>Scoreboard Font Preview</h1>
+  <div class="options"></div>
+
+  <div class="stage">
+    <img src="assets/scoreboard.png" />
+    <div class="sample">
+      <div class="title">Winners Final</div>
+      <div class="score p1">0</div>
+      <div class="name p1">Spitfire2929</div>
+      <div class="score p2">0</div>
+      <div class="name p2">smos</div>
+    </div>
+  </div>
+
+  <code></code>
+</main>
+
+<script>
+  const fonts = [
+    ["Bahnschrift", '"Bahnschrift", "Segoe UI", Arial, sans-serif'],
+    ["Segoe UI", '"Segoe UI", Arial, sans-serif'],
+    ["Arial", "Arial, sans-serif"],
+    ["Trebuchet MS", '"Trebuchet MS", Arial, sans-serif'],
+    ["Tahoma", 'Tahoma, "Segoe UI", sans-serif'],
+    ["Verdana", 'Verdana, "Segoe UI", sans-serif'],
+    ["Jura", '"Jura", "Segoe UI", sans-serif'],
+  ];
+
+  const options = document.querySelector(".options");
+  const sample = document.querySelector(".sample");
+  const code = document.querySelector("code");
+
+  const selectFont = (button, stack) => {
+    document.querySelectorAll("button").forEach((el) => el.classList.remove("active"));
+    button.classList.add("active");
+    sample.style.setProperty("--preview-font", stack);
+    code.textContent = `font-family: ${stack};`;
+  };
+
+  fonts.forEach(([name, stack], index) => {
+    const button = document.createElement("button");
+    button.innerHTML = `<strong>${name}</strong><span>Spitfire2929 0 vs smos 0</span>`;
+    button.style.fontFamily = stack;
+    button.addEventListener("click", () => selectFont(button, stack));
+    options.appendChild(button);
+    if (index === 0) {
+      selectFont(button, stack);
+    }
+  });
+</script>

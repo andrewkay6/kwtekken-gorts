@@ -3,19 +3,21 @@ windows:
 		go build -o dist/windows/gorts.exe -ldflags -H=windowsgui
 	cp -r web dist/windows/
 	cp -r tcl dist/windows/
-	cp players.sample.csv dist/windows/
-	cp README.md dist/windows/
-	cp -r screenshots dist/windows/
-	cp gorts.png dist/windows/
+cp players.sample.csv dist/windows/
+cp README.md dist/windows/
+cp -r screenshots dist/windows/
+cp gorts.png dist/windows/
+cp kwtekken-icon.png dist/windows/
 
 linux:
 	CGO_ENABLED=0 GOOS=linux go build -o dist/linux/gorts
 	cp -r web dist/linux/
 	cp -r tcl dist/linux/
-	cp players.sample.csv dist/linux/
-	cp README.md dist/linux/
-	cp -r screenshots dist/linux/
-	cp gorts.png dist/linux/
+cp players.sample.csv dist/linux/
+cp README.md dist/linux/
+cp -r screenshots dist/linux/
+cp gorts.png dist/linux/
+cp kwtekken-icon.png dist/linux/
 
 dist/GORTS-Windows.zip: windows
 	cd dist/windows; \

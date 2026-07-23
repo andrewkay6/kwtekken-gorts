@@ -118,6 +118,7 @@ func startGUI(tclPath string) {
 				scoreboard.P2country,
 				strconv.Itoa(scoreboard.P2score),
 				scoreboard.P2team,
+				scoreboard.Font,
 			)
 
 		case "applyscoreboard":
@@ -131,6 +132,9 @@ func startGUI(tclPath string) {
 			scoreboard.P2country = req.Args[7]
 			scoreboard.P2score, _ = strconv.Atoi(req.Args[8])
 			scoreboard.P2team = req.Args[9]
+			if len(req.Args) > 10 {
+				scoreboard.Font = req.Args[10]
+			}
 			scoreboard.Write()
 			respond()
 
@@ -199,6 +203,7 @@ type Scoreboard struct {
 	P2country   string `json:"p2country"`
 	P2score     int    `json:"p2score"`
 	P2team      string `json:"p2team"`
+	Font        string `json:"font"`
 }
 
 func initScoreboard() Scoreboard {
